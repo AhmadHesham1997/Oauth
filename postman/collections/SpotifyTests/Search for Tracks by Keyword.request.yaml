@@ -1,0 +1,102 @@
+$kind: http-request
+url: https://api.spotify.com/v1/search?q=love&type=track
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+queryParams:
+  q: love
+  type: track
+body:
+  type: urlencoded
+scripts:
+  - type: afterResponse
+    code: "//Status code = 200 OK \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      //Response contains tracks.items[] we check if the items have values or
+      nor\r
+
+      pm.test(\"Tracks list is not empty\", () => {\r
+
+      \    const json = pm.response.json();\r
+
+      \    pm.expect(json.tracks.items).to.not.be.empty;\r
+
+      })\r
+
+      //Validate that track names or album titles contain the search keyword
+      (love)\r
+
+      pm.test(\"At least one Tracks contain the search keyword 'love'\", () =>
+      {\r
+
+      \    const json = pm.response.json();\r
+
+      \    //we need to loop on the search to check it title contains loop by
+      using some() = returns true if at least ONE item matches the condition.\r
+
+      \    // the word tracks in orange is the itrator that loops in the array i
+      can name it anything\r
+
+      \    const found = json.tracks.items.some(\r
+
+      \        tracks => tracks.name.toLowerCase().includes('love') ||
+      album.name.toLowerCase().includes('love')\r
+
+      \    );\r
+
+      \    pm.expect(found).to.be.true;\r
+
+      })\r
+
+      // without arrow function\r
+
+      /*pm.test(\"At least one track or album contains 'love'\", function () {\r
+
+      \    const json = pm.response.json();\r
+
+      \r
+
+      \    const found = json.tracks.items.some(function (track) {\r
+
+      \        return (\r
+
+      \            track.name.toLowerCase().includes(\"love\") ||\r
+
+      \            track.album.name.toLowerCase().includes(\"love\")\r
+
+      \        );\r
+
+      \    });\r
+
+      \r
+
+      \    pm.expect(found).to.be.true;\r
+
+      });\r
+
+      */\r
+
+      \r
+
+      //Validate that track names or album titles contain the search keyword
+      (love) this validates the entire response\r
+
+      // Not espisfically tracks or album\r
+
+      /*pm.test(\"Response body contains the keyword 'love'\", () => {\r
+
+      \    const body = pm.response.text().toLowerCase();\r
+
+      \    pm.expect(body).to.include(\"love\");\r
+
+      });*/\r
+
+      \r\n"
+    language: text/javascript
+order: 2000

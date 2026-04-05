@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{BaseUrl}}/api/v1/wishlist"
+method: GET
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjhhYTQ1NDIxZGM1NTM5ZTk4NzNjYSIsIm5hbWUiOiJBaG1lZCBBYmQgQWwtTXV0aSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjgwNTU0ODc1LCJleHAiOjE2ODgzMzA4NzV9.b_lKInOun7NFORc_XKuddTE_cK7oM6TuouhRi0bv0LI
+body:
+  type: json
+  content: ""
+auth:
+  type: noauth
+order: 3000

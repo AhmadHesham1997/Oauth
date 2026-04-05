@@ -1,0 +1,26 @@
+# Use this workspace to collaborate
+workspace:
+  id: 06b5d305-658b-46a0-8aab-604144f70418
+
+localResources:
+  collections:
+    - ..\OAuth.postman_collection.json
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  collections:
+    ..\postman\collections\MokeLibrary: 33853759-09175677-4717-4473-965d-094a2cc0e701
+    ..\postman\collections\MapsAPI: 33853759-140a9061-15ef-4af1-86b8-fc431960ecd8
+    ..\postman\collections\Time API: 33853759-46a09745-fe2a-4c6d-9959-81efff6220c6
+    ..\postman\collections\OAuth: 33853759-64f7eb1f-27f7-4138-a948-5846c447c13b
+    ..\postman\collections\LibraryAPI: 33853759-7b453ef1-239f-4abe-b8d2-abbc3e65cb05
+    ..\postman\collections\Test: 33853759-973d069a-60ed-4957-a8fd-f6ce9ac8f4d6
+    ..\postman\collections\End-to-End Tests: 33853759-97b5470b-2c93-4d48-a900-0e5e61857050
+    ..\postman\collections\Restful-Booker: 33853759-a38d69eb-3786-418d-886b-b7c97c889b47
+    ..\postman\collections\Route E-commerce App: 33853759-ccde10f7-183a-461c-926a-832d0e295146
+    ..\postman\collections\SpotifyTests: 33853759-ebd8309b-9479-4d58-addd-fbbbdd5d0380
+  environments:
+    ..\postman\environments\MokeLibrary.environment.yaml: 33853759-07b63725-ab36-4ade-9257-588ccaf0c837
+    ..\postman\environments\SpotifyTests.environment.yaml: 33853759-2af19184-97ea-4f33-bbd2-e57634d83f3e
+    ..\postman\environments\Learn.environment.yaml: 33853759-678678e8-0b43-40c8-ada8-99716b939cfa

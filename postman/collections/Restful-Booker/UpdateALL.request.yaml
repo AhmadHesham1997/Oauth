@@ -1,0 +1,29 @@
+$kind: http-request
+url: "{{baseURL}}/booking/456"
+method: PUT
+headers:
+  Cookie: token=c5eac5e5ead0346
+body:
+  type: json
+  content: "{\r
+
+    \    \"firstname\": \"Test\",\r
+
+    \    \"lastname\": \"Name\",\r
+
+    \    \"totalprice\": 111,\r
+
+    \    \"depositpaid\": true,\r
+
+    \    \"bookingdates\": {\r
+
+    \        \"checkin\": \"2018-01-01\",\r
+
+    \        \"checkout\": \"2019-01-01\"\r
+
+    \    },\r
+
+    \    \"additionalneeds\": \"Breakfast\"\r
+
+    }"
+order: 7000

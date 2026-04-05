@@ -1,0 +1,38 @@
+$kind: http-request
+url: "{{url}}/getcoursedetails?name=java"
+method: GET
+queryParams:
+  name: java
+scripts:
+  - type: afterResponse
+    code: "// Gneric Test case where the test case pass if response came back with
+      200 or 201 by creating an array of all codes i have\r
+
+      pm.test(\"Response status is either 200 or 201\", function () {\r
+
+      \    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r
+
+      });\r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      pm.test(\"Body matches string\", function () {\r
+
+      \    pm.expect(pm.response.text()).to.include(\"java\");\r
+
+      });\r
+
+      pm.test(\"Your test name\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.name).to.eql(\"java\");\r
+
+      });\r\n"
+    language: text/javascript
+examples: ./.resources/GetCourseDetails.resources/examples
+order: 2000

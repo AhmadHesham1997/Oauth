@@ -1,0 +1,6 @@
+name: SpotifyTests
+values:
+  - key: access_token
+    value: ""
+    enabled: true
+color: null

@@ -1,0 +1,144 @@
+$kind: http-request
+url: https://timeapi.io/api/time/current/zone?timeZone=Europe%2FAmsterdam
+method: GET
+queryParams:
+  timeZone: Europe%2FAmsterdam
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Check if the status code is 200\", function () {\r
+
+      \    pm.expect(pm.response.code).to.eql(200)\r
+
+      })\r
+
+      pm.test(\"Check if the status value is OK\", function () {\r
+
+      \    pm.expect(pm.response.status).to.be.equal(\"OK\")\r
+
+      })\r
+
+      pm.test(\"Check if the response time is less than 30s\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(30000)\r
+
+      })\r
+
+      pm.test(\"Check if the response size is less than 5000B\", function () {\r
+
+      \    pm.expect(pm.response.responseSize).to.be.below(5000)\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of serve is nginx/1.27.0\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Server\")).to.be.contain(\"nginx\
+      /1.27.0\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Date is Mon, 10 Nov 2025
+      20:08:20 GMT\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Date\")).to.be.contain(\"Mon, 10
+      Nov 2025\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Content-Type is
+      application/json; charset=utf-8\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.contain(\
+      \"application/json; charset=utf-8\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Transfer-Encoding is
+      chunked\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Transfer-Encoding\")).to.be.cont\
+      ain(\"chunked\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Connection is keep-alive\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Connection\")).to.be.contain(\"k\
+      eep-alive\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Vary is Accept-Encoding\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Vary\")).to.be.contain(\"Accept-\
+      Encoding\")\r
+
+      })\r
+
+      pm.test(\"Validate that the value of year  is 2025\", function () {\r
+
+      \    pm.expect(pm.response.json().year).to.be.equal(2025)\r
+
+      })\r
+
+      pm.test(\"Validate that the value of month  is 11\", function () {\r
+
+      \    pm.expect(pm.response.json().month).to.be.equal(11)\r
+
+      })\r
+
+      pm.test(\"Validate that the value of day  is 10\", function () {\r
+
+      \    pm.expect(pm.response.json().day).to.be.equal(10)\r
+
+      })\r
+
+      pm.test(\"Validate that the value of hour  is 21\", function () {\r
+
+      \    pm.expect(pm.response.json().hour).to.be.equal(21)\r
+
+      })\r
+
+      pm.test(\"Validate that the value of minute  is 19\", function () {\r
+
+      \    pm.expect(pm.response.json().minute).to.be.equal(19)\r
+
+      })\r
+
+      pm.test(\"Validate that the value of seconds  is 8\", function () {\r
+
+      \    pm.expect(pm.response.json().seconds).to.be.equal(8)\r
+
+      })\r
+
+      pm.test(\"Validate that the value of milliSeconds  is 495\", function ()
+      {\r
+
+      \    pm.expect(pm.response.json().milliSeconds).to.be.equal(495)\r
+
+      })\r
+
+      pm.test(\"Validate that the value of dateTime  is
+      2025-11-10T21:19:08.4954879\", function () {\r
+
+      \    pm.expect(pm.response.json().dateTime).to.be.contain(\"2025-11-10T21\
+      :19:08.4954879\")\r
+
+      })\r
+
+      pm.test(\"Validate that the value of date  is 11/10/2025\", function ()
+      {\r
+
+      \    pm.expect(pm.response.json().date).to.be.contain(\"11/10/2025\")\r
+
+      })\r
+
+      pm.test(\"Validate that the value of time  is 21:19\", function () {\r
+
+      \    pm.expect(pm.response.json().time).to.be.contain(\"21:19\")\r
+
+      })\r\n"
+    language: text/javascript
+order: 1000

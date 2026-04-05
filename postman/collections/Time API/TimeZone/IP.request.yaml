@@ -1,0 +1,180 @@
+$kind: http-request
+url: https://timeapi.io/api/timezone/ip?ipAddress=237.71.232.203
+method: GET
+queryParams:
+  ipAddress: 237.71.232.203
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Check if the status code is 20\", function () {\r
+
+      \    pm.expect(pm.response.code).to.eql(200)\r
+
+      })\r
+
+      pm.test(\"Check if the status value is OK\", function () {\r
+
+      \    pm.expect(pm.response.status).to.be.equal(\"OK\")\r
+
+      })\r
+
+      pm.test(\"Check if the response time is less than 30s\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(30000)\r
+
+      })\r
+
+      pm.test(\"Check if the response size is less than 15000B\", function ()
+      {\r
+
+      \    pm.expect(pm.response.responseSize).to.be.below(15000)\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of serve is nginx/1.27.0\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Server\")).to.be.contain(\"nginx\
+      /1.27.0\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Date is Mon, 10 Nov 2025
+      20:08:20 GMT\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Date\")).to.be.contain(\"Mon, 10
+      Nov 2025\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Content-Type is
+      application/json; charset=utf-8\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.contain(\
+      \"application/json; charset=utf-8\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Transfer-Encoding is
+      chunked\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Transfer-Encoding\")).to.be.cont\
+      ain(\"chunked\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Connection is keep-alive\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Connection\")).to.be.contain(\"k\
+      eep-alive\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Vary is Accept-Encoding\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Vary\")).to.be.contain(\"Accept-\
+      Encoding\")\r
+
+      })\r
+
+      pm.test(\"Validate that the timeZone is UTC\", function () {\r
+
+      \    pm.expect(pm.response.json().timeZone).to.be.contain(\"UTC\")\r
+
+      })\r
+
+      pm.test(\"Validate that the currentLocalTime is
+      2025-11-10T21:14:07.7767791\", function () {\r
+
+      \    pm.expect(pm.response.json().currentLocalTime).to.be.contain(\"2025-\
+      11-10T21:14:07.7767791\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  currentUtcOffset of seconds is 0\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().currentUtcOffset.seconds).to.be.equal(0)\
+      \r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  currentUtcOffset of milliseconds is
+      0\", function () {\r
+
+      \    pm.expect(pm.response.json().currentUtcOffset.milliseconds).to.be.eq\
+      ual(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  currentUtcOffset of ticks is 0\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().currentUtcOffset.ticks).to.be.equal(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  currentUtcOffset of nanoseconds is
+      0\", function () {\r
+
+      \    pm.expect(pm.response.json().currentUtcOffset.nanoseconds).to.be.equ\
+      al(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  standardUtcOffset of seconds is
+      -18000\", function () {\r
+
+      \    pm.expect(pm.response.json().standardUtcOffset.seconds).to.be.equal(\
+      0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  standardUtcOffset of milliseconds
+      is  0\", function () {\r
+
+      \    pm.expect(pm.response.json().standardUtcOffset.milliseconds).to.be.e\
+      qual(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  standardUtcOffset of ticks is  0 \",
+      function () {\r
+
+      \    pm.expect(pm.response.json().standardUtcOffset.ticks).to.be.equal(0)\
+      \r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  standardUtcOffset of nanoseconds is
+      0\", function () {\r
+
+      \    pm.expect(pm.response.json().standardUtcOffset.nanoseconds).to.be.eq\
+      ual(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of hasDayLightSaving is false\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().hasDayLightSaving).to.be.equal(false)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of isDayLightSavingActive is false\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().isDayLightSavingActive).to.be.equal(fal\
+      se)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval is null\", function ()
+      {\r
+
+      \    pm.expect(pm.response.json().dstInterval).to.be.equal(null)\r
+
+      })\r\n"
+    language: text/javascript
+order: 4000

@@ -1,0 +1,153 @@
+$kind: http-request
+url: https://api.spotify.com/v1/browse/categories/dinner/playlists
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+scripts:
+  - type: afterResponse
+    code: "//Status code = 200 OK \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      //Response contains playlists with: name, id, tracks.total\r
+
+      pm.test(\"Response contains playlists with name, id, tracks.total\",
+      function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.playlists.items).to.have.length.above(0);\r
+
+      \    pm.expect(jsonData.playlists.items[0]).to.have.property('name');\r
+
+      \    pm.expect(jsonData.playlists.items[0]).to.have.property('id');\r
+
+      \    pm.expect(jsonData.playlists.items[0].tracks).to.have.property('tota\
+      l');\r
+
+      \    pm.expect(jsonData.playlists.items[0].tracks.total).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      //Ensure each playlist has both name and id\r
+
+      pm.test(\"Each playlist has a name and id\", function () {\r
+
+      \    pm.expect(playlist.name).to.exist;\r
+
+      \    pm.expect(playlist.id).to.exist;\r
+
+      });\r
+
+      /*\r
+
+      {\r
+
+      \  \"message\": \"Popular Playlists\",\r
+
+      \  \"playlists\": {\r
+
+      \    \"href\":
+      \"https://api.spotify.com/v1/me/shows?offset=0&limit=20\",\r
+
+      \    \"limit\": 20,\r
+
+      \    \"next\": \"https://api.spotify.com/v1/me/shows?offset=1&limit=1\",\r
+
+      \    \"offset\": 0,\r
+
+      \    \"previous\":
+      \"https://api.spotify.com/v1/me/shows?offset=1&limit=1\",\r
+
+      \    \"total\": 4,\r
+
+      \    \"items\": [\r
+
+      \      {\r
+
+      \        \"collaborative\": false,\r
+
+      \        \"description\": \"string\",\r
+
+      \        \"external_urls\": {\r
+
+      \          \"spotify\": \"string\"\r
+
+      \        },\r
+
+      \        \"href\": \"string\",\r
+
+      \        \"id\": \"string\",\r
+
+      \        \"images\": [\r
+
+      \          {\r
+
+      \            \"url\":
+      \"https://i.scdn.co/image/ab67616d00001e02ff9ca10b55ce82ae553c8228\",\r
+
+      \            \"height\": 300,\r
+
+      \            \"width\": 300\r
+
+      \          }\r
+
+      \        ],\r
+
+      \        \"name\": \"string\",\r
+
+      \        \"owner\": {\r
+
+      \          \"external_urls\": {\r
+
+      \            \"spotify\": \"string\"\r
+
+      \          },\r
+
+      \          \"href\": \"string\",\r
+
+      \          \"id\": \"string\",\r
+
+      \          \"type\": \"user\",\r
+
+      \          \"uri\": \"string\",\r
+
+      \          \"display_name\": \"string\"\r
+
+      \        },\r
+
+      \        \"public\": false,\r
+
+      \        \"snapshot_id\": \"string\",\r
+
+      \        \"tracks\": {\r
+
+      \          \"href\": \"string\",\r
+
+      \          \"total\": 0\r
+
+      \        },\r
+
+      \        \"type\": \"string\",\r
+
+      \        \"uri\": \"string\"\r
+
+      \      }\r
+
+      \    ]\r
+
+      \  }\r
+
+      }\r
+
+      \ */"
+    language: text/javascript
+order: 9000

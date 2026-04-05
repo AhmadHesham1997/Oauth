@@ -1,0 +1,201 @@
+$kind: http-request
+url: https://timeapi.io/api/conversion/converttimezone
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"fromTimeZone\": \"Europe/Amsterdam\",\r
+
+    \  \"dateTime\": \"2021-03-14 17:45:00\",\r
+
+    \  \"toTimeZone\": \"America/Los_Angeles\",\r
+
+    \  \"dstAmbiguity\": \"\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Check if the status code is 20\", function () {\r
+
+      \    pm.expect(pm.response.code).to.eql(200)\r
+
+      })\r
+
+      pm.test(\"Check if the status value is OK\", function () {\r
+
+      \    pm.expect(pm.response.status).to.be.equal(\"OK\")\r
+
+      })\r
+
+      pm.test(\"Check if the response time is less than 30s\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(30000)\r
+
+      })\r
+
+      pm.test(\"Check if the response size is less than 15000B\", function ()
+      {\r
+
+      \    pm.expect(pm.response.responseSize).to.be.below(15000)\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of serve is nginx/1.27.0\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Server\")).to.be.contain(\"nginx\
+      /1.27.0\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Date is Mon, 10 Nov 2025
+      20:08:20 GMT\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Date\")).to.be.contain(\"Mon, 10
+      Nov 2025\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Content-Type is
+      application/json; charset=utf-8\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.contain(\
+      \"application/json; charset=utf-8\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Transfer-Encoding is
+      chunked\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Transfer-Encoding\")).to.be.cont\
+      ain(\"chunked\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Connection is keep-alive\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Connection\")).to.be.contain(\"k\
+      eep-alive\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Vary is Accept-Encoding\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Vary\")).to.be.contain(\"Accept-\
+      Encoding\")\r
+
+      })\r
+
+      pm.test(\"Validate that the fromTimezone is Europe/Amsterdam\", function
+      () {\r
+
+      \    pm.expect(pm.response.json().fromTimezone).to.be.contain(\"Europe/Am\
+      sterdam\")\r
+
+      })\r
+
+      pm.test(\"Validate that the fromDateTime is 2021-03-14T17:45:00\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().fromDateTime).to.be.contain(\"2021-03-1\
+      4T17:45:00\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of year is 2021\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.year).to.be.equal(2021)\
+      \r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of month is 3\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.month).to.be.equal(3)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of day is 14\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.day).to.be.equal(14)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of hour is 9\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.hour).to.be.equal(9)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of minute is 45\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.minute).to.be.equal(45)\
+      \r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of seconds is 0\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.seconds).to.be.equal(0)\
+      \r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of milliSeconds is
+      0\", function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.milliSeconds).to.be.eq\
+      ual(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of dateTime is
+      2021-03-14T09:45:00\", function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.dateTime).to.be.contai\
+      n(\"2021-03-14T09:45:00\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of date is
+      03/14/2021\", function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.date).to.be.contain(\"\
+      03/14/2021\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of time is 09:45\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.time).to.be.contain(\"\
+      09:45\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of timeZone is
+      America/Los_Angeles\", function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.timeZone).to.be.contai\
+      n(\"America/Los_Angeles\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  conversionResult of dstActive is
+      true\", function () {\r
+
+      \    pm.expect(pm.response.json().conversionResult.dstActive).to.be.equal\
+      (true)\r
+
+      })"
+    language: text/javascript
+order: 1000

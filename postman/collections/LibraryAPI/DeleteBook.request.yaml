@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{BaseURL}}Library/DeleteBook.php"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \ \r
+
+    \"ID\" : \"{{ID}}\"\r
+
+    \ \r
+
+    } \r\n"
+order: 4000

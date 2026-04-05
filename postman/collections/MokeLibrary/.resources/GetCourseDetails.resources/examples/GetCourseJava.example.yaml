@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{url}}/getcoursedetails?name=java"
+  method: GET
+  queryParams:
+    name: java
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: "{\r
+
+      \    \"name\": \"java\",\r
+
+      \    \"category\": \"javascript\",\r
+
+      \    \"content\": \"videos\",\r
+
+      \    \"length\": \"15hours\",\r
+
+      \    \"students\": 12342\r
+
+      }\r\n"
+order: 1000

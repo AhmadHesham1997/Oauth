@@ -1,0 +1,14 @@
+$kind: http-request
+url: https://ecommerce.routemisr.com/api/v1/cart
+method: POST
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Y2IyY2MwODQ2MmFiMDJjNzFlNjhjYSIsIm5hbWUiOiJtb1NhbGFoIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MDg3OTU5NDgsImV4cCI6MTcxNjU3MTk0OH0.ih8ebpl4GT6gNM3Cb9nRLx8JTZakXyoSDo4WFyxMv0M
+body:
+  type: json
+  content: |-
+    {
+        "productId": "6428ebc6dc1175abc65ca0b9"
+    }
+auth:
+  type: noauth
+order: 1000

@@ -1,0 +1,37 @@
+$kind: http-request
+url: https://api.spotify.com/v1/albums/4aawyAB9vmqN3uQ7FjRGTy
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+scripts:
+  - type: afterResponse
+    code: >
+      //Status code = 200 OK 
+
+      pm.test("Status code is 200", function () {
+          pm.response.to.have.status(200);
+      });
+
+
+      //Response includes album details (album_type, artists,
+      release_date,tracks.items)
+
+      pm.test("Each album has album_type, artists, and release_date,
+      tracks.items", () => {
+          const json = pm.response.json();
+          pm.expect(json).to.have.property("album_type");
+          pm.expect(json).to.have.property("artists");
+          pm.expect(json).to.have.property("release_date");
+          pm.expect(json.tracks).to.have.property("items");
+      })
+
+
+      //Ensure album_type is one of { "album", "single", "compilation" }
+
+      pm.test("album_type is one of { 'album', 'single', 'compilation' }",
+      function () {
+          const json = pm.response.json();
+          pm.expect(json.album_type).to.be.oneOf(["album", "single", "compilation"]);
+      });
+    language: text/javascript
+order: 4000

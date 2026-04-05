@@ -1,0 +1,53 @@
+$kind: collection
+description: >-
+  ## MapsAPI Collection
+
+
+  This collection provides a set of CRUD operations for managing places using a
+  Maps API. It allows you to **add**, **retrieve**, **update**, and **delete**
+  place records through a consistent RESTful interface.
+
+
+  ### Requests
+
+
+  | Method | Name | Description |
+
+  |--------|------|-------------|
+
+  | `POST` | **AddPlace** | Creates a new place entry in the Maps API. |
+
+  | `GET` | **GetPlace** | Retrieves details of an existing place using its
+  unique place ID. |
+
+  | `PUT` | **UpdatePlace** | Updates the information of an existing place. |
+
+  | `DELETE` | **DeletePlace** | Removes a place from the Maps API. |
+
+
+  ### Authentication
+
+
+  All requests are authenticated using an **API key**, passed as a query
+  parameter (`key={{apiKey}}`). Make sure your API key is set before sending any
+  requests.
+
+
+  ### Collection Variables
+
+
+  The following collection variables are used across requests and should be
+  configured before use:
+
+
+  - `baseUrl` — The base URL of the Maps API (e.g.,
+  `https://rahulshettyacademy.com`)
+
+  - `apiKey` — Your Maps API authentication key
+
+  - `placeId` — The unique identifier of a place, used in **GetPlace** and other
+  place-specific operations
+variables:
+  baseUrl: https://rahulshettyacademy.com
+  apiKey: qaclick123
+  placeId: e452018adb3c204ee3ba46633da4acf5

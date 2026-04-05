@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{BaseUrl}}/api/v1/orders/"
+method: GET
+body:
+  type: json
+  content: ""
+auth:
+  type: noauth
+order: 2000

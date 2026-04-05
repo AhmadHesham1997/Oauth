@@ -1,0 +1,112 @@
+$kind: http-request
+url: "{{BaseURL}}Library/Addbook.php"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: "{\r
+
+    \"name\":\"Learn Appium Automation with Java\",\r
+
+    \"isbn\":\"{{BookID}}\",\r
+
+    \"aisle\":\"{{AisleCode}}\",\r
+
+    \"author\":\"John foe\"\r
+
+    }\r\n"
+scripts:
+  - type: beforeRequest
+    code: "var random = Math. floor (Math. random() * 1000 ) +1 ;\r
+
+      const CompanyCodevar = pm.globals.get(\"CompaanyCode\");\r
+
+      pm.collectionVariables.set(\"BookID\" , CompanyCodevar)\r
+
+      pm.collectionVariables.set(\"AisleCode\", random);\r
+
+      pm.collectionVariables.set(\"BookName\", \"Learn Appium Automation with
+      Java\");\r
+
+      pm.collectionVariables.set(\"Author\", \"John foe\");\r
+
+      \r
+
+      \r\n"
+    language: text/javascript
+  - type: afterResponse
+    code: "let responseData = pm.response.json();\r
+
+      pm.collectionVariables.set(\"ID\", responseData.ID);\r
+
+      console.log(\"Book ID saved:\", responseData.ID);\r
+
+      \r
+
+      // parsing the request body to get isbn and aisle to access the body
+      similar to using pm.response.json() to access the response body\r
+
+      pm.test(\"Validate ID equals request isbn + aisle\", function () {\r
+
+      \r
+
+      \    // Parse the response\r
+
+      \    const res = pm.response.json();\r
+
+      \r
+
+      \    // Parse the request body\r
+
+      \    const req = JSON.parse(pm.request.body.raw);\r
+
+      \r
+
+      \    const expectedID = req.isbn + req.aisle;\r
+
+      \r
+
+      \    // Assertion\r
+
+      \    pm.expect(res.ID).to.eql(expectedID);\r
+
+      });\r
+
+      \r
+
+      //or \r
+
+      /*pm.test(\"Validate ID is isbn + aisle\", function () {\r
+
+      \r
+
+      \    // get response\r
+
+      \    let res = pm.response.json();\r
+
+      \    \r
+
+      \    // get variables from Postman environment\r
+
+      \    let isbn = pm.variables.get(\"BookID\");\r
+
+      \    let aisle = pm.variables.get(\"AisleCode\");\r
+
+      \r
+
+      \    // expected concatenation\r
+
+      \    let expectedID = isbn + aisle;\r
+
+      \r
+
+      \    // perform test\r
+
+      \    pm.expect(res.ID).to.eql(expectedID);\r
+
+      });\r
+
+      */\r\n"
+    language: text/javascript
+order: 1000

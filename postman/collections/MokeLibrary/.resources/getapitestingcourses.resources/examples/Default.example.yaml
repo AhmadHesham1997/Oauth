@@ -1,0 +1,58 @@
+$kind: http-example
+request:
+  url: "{{url}}/getapitestingcourses"
+  method: GET
+  body:
+    type: text
+    content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: text
+    content: " \"data\": [\r
+
+      \        {\r
+
+      \            \"course\": \"Postman\",\r
+
+      \            \"price\": 150,\r
+
+      \            \"category\": \"Javascript\"\r
+
+      \        },\r
+
+      \        {\r
+
+      \            \"course\": \"SoapUI\",\r
+
+      \            \"price\": 25,\r
+
+      \            \"category\": \"Groovy\"\r
+
+      \        },\r
+
+      \        {\r
+
+      \            \"course\": \"RestAssured\",\r
+
+      \            \"price\": 100,\r
+
+      \            \"category\": \"Java\"\r
+
+      \        },\r
+
+      \        {\r
+
+      \            \"course\": \"RestAssured\",\r
+
+      \            \"price\": 100,\r
+
+      \            \"category\": \"Java\"\r
+
+      \        }\r
+
+      \    ]\r
+
+      }\r\n"
+order: 1000

@@ -1,0 +1,44 @@
+$kind: http-request
+url: https://api.spotify.com/v1/audio-features/11dFghVXANMlKmJXsNCbNl
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+scripts:
+  - type: afterResponse
+    code: "//Status code = 200 OK \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      //Response includes album details (danceability, energy , tempo ,valence,
+      liveness)\r
+
+      pm.test(\"Response body should include audio features\", function () {\r
+
+      \    pm.expect(pm.response.json()).to.have.property(\"danceability\");\r
+
+      \    pm.expect(pm.response.json()).to.have.property(\"energy\");\r
+
+      \    pm.expect(pm.response.json()).to.have.property(\"tempo\");\r
+
+      \    pm.expect(pm.response.json()).to.have.property(\"valence\");\r
+
+      });\r
+
+      //Response should be from Spotify Documentation if the status code is
+      200\r
+
+      //danceability: 0.585 (True)\r
+
+      //energy: 0.842 (True)\r
+
+      //tempo: 118.211 (True)\r
+
+      //valence: 0.428 (True)"
+    language: text/javascript
+order: 6000

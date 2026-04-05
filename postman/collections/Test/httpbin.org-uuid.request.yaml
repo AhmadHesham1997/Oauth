@@ -1,0 +1,76 @@
+$kind: http-request
+name: httpbin.org/uuid
+url: httpbin.org/uuid
+method: GET
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      pm.globals.set(\"token100\", pm.response.json().uuid);\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      pm.test(\"Response time is less than 3000ms\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(3000);\r
+
+      });\r
+
+      var template = `\r
+
+      <style type=\"text/css\">\r
+
+      \    .tftable {font-size:14px;color:#333333;width:100%;border-width:
+      1px;border-color:#87ceeb;border-collapse:collapse;}\r
+
+      \    .tftable th
+      {font-size:18px;background-color:#87ceeb;border-width:1px;padding:8px;bor\
+      der-style:solid;border-color:#87ceeb;text-align:left;}\r
+
+      \    .tftable tr {background-color:#ffffff;}\r
+
+      \    .tftable td
+      {font-size:14px;border-width:1px;padding:8px;border-style:solid;border-co\
+      lor:#87ceeb;}\r
+
+      \    .tftable tr:hover {background-color:#e0ffff;}\r
+
+      </style>\r
+
+      \r
+
+      <table class=\"tftable\" border=\"1\">\r
+
+      \    <tr>\r
+
+      \        <th>UUID</th>\r
+
+      \    </tr>\r
+
+      \    <tr>\r
+
+      \        <td>{{response.uuid}}</td>\r
+
+      \    </tr>\r
+
+      </table>\r
+
+      `;\r
+
+      \r
+
+      function constructVisualizerPayload() {\r
+
+      \    return {response: pm.response.json()}\r
+
+      }\r
+
+      \r
+
+      pm.visualizer.set(template, constructVisualizerPayload());"
+    language: text/javascript
+order: 1000

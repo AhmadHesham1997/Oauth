@@ -1,0 +1,11 @@
+$kind: http-request
+name: GetcourseDetails
+url: http://localhost:3000/getCourseDetails?access_token=mock_access_token_12345
+method: GET
+queryParams:
+  access_token: mock_access_token_12345
+auth:
+  type: bearer
+  credentials:
+    token: mock_access_token_12345
+order: 2000

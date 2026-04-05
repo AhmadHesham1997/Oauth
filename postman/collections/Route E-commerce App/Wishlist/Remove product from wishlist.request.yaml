@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{BaseUrl}}/api/v1/wishlist/61e81f641904360ec15c6db1"
+method: DELETE
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmFhNjRiMzk5NDYzMjE3NjEyMWZmZSIsIm5hbWUiOiJBaG1lZCBBYmQgQWwtTXV0aSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjc4MjMxNzA2LCJleHAiOjE2ODYwMDc3MDZ9.OxP2pS-D8ub3wk-CCQabA2GtBXaUEvHMnYwOe6XNyEA
+body:
+  type: json
+  content: ""
+auth:
+  type: noauth
+order: 2000

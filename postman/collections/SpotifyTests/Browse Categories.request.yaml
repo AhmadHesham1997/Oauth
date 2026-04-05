@@ -1,0 +1,36 @@
+$kind: http-request
+url: https://api.spotify.com/v1/browse/categories?limit=3
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+queryParams:
+  limit: "3"
+scripts:
+  - type: afterResponse
+    code: "//Status code = 200 OK \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      //Response includes categories.items[] \r
+
+      pm.test(\"Response includes categories.items\", function () {\r
+
+      \    pm.response.to.have.jsonBody('categories.items');\r
+
+      });\r
+
+      //If using limit=3, validate only 3 categories are returned\r
+
+      pm.test(\"Response includes 3 categories\", function () {\r
+
+      \    pm.expect(pm.response.json().categories.items.length).to.equal(3);\r
+
+      });"
+    language: text/javascript
+order: 8000

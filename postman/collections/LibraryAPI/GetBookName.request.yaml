@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{BaseURL}}Library/GetBook.php?AuthorName=somename"
+method: GET
+queryParams:
+  AuthorName: somename
+order: 2000

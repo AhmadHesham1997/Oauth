@@ -1,0 +1,20 @@
+$kind: http-request
+url: https://ecommerce.routemisr.com/api/v1/orders/checkout-session/65d5e3179c86f6003429bacd?url=http://localhost:5173
+method: POST
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Y2IyY2MwODQ2MmFiMDJjNzFlNjhjYSIsIm5hbWUiOiJtb1NhbGFoIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MDgwMTUzMTksImV4cCI6MTcxNTc5MTMxOX0.LarokPN7RY-WEEsZ0AMxMLoBZll93Yf_DiMk7X_4SRY
+queryParams:
+  url: http://localhost:5173
+body:
+  type: json
+  content: |-
+    {
+        "shippingAddress":{
+            "details": "details",
+            "phone": "01010700999",
+            "city": "Cairo"
+            }
+    }
+auth:
+  type: noauth
+order: 4000

@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{baseUrl}}/maps/api/place/get/json?place_id={{placeId}}&key={{apiKey}}"
+method: GET
+queryParams:
+  place_id: "{{placeId}}"
+  key: "{{apiKey}}"
+order: 2000

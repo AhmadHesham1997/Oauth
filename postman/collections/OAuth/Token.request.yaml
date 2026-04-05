@@ -1,0 +1,11 @@
+$kind: http-request
+url: http://localhost:3000/oauth/token
+method: POST
+body:
+  type: urlencoded
+  content:
+    client_id: test_client_id
+    client_secret: test_client_secret
+    grant_type: client_credentials
+    scope: read
+order: 1000

@@ -1,0 +1,71 @@
+$kind: http-request
+url: https://api.spotify.com/v1/search?q=Eminem&type=album
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+queryParams:
+  q: Eminem
+  type: album
+scripts:
+  - type: afterResponse
+    code: "//Status code = 200 OK \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      //Validate album list is not empty\r
+
+      pm.test(\"Album list is not empty\", function () {\r
+
+      \    const json = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(json.albums.items).to.not.be.empty;\r
+
+      });\r
+
+      //Response includes album details (name, id, release_date)\r
+
+      pm.test(\"Each album has name, id, and release_date\", () => {\r
+
+      \    const json = pm.response.json();\r
+
+      \    pm.expect(json.albums.items[0]).to.have.property(\"name\");\r
+
+      \    pm.expect(json.albums.items[0]).to.have.property(\"id\");\r
+
+      \    pm.expect(json.albums.items[0]).to.have.property(\"release_date\");\r
+
+      })\r
+
+      \r
+
+      /*pm.test(\"Each album has name, id, and release_date\", function () {\r
+
+      \    const json = pm.response.json();\r
+
+      \r
+
+      \    json.albums.items.forEach(function (album) {\r
+
+      \        pm.expect(album).to.have.property(\"name\");\r
+
+      \        pm.expect(album).to.have.property(\"id\");\r
+
+      \        pm.expect(album).to.have.property(\"release_date\");\r
+
+      \    });\r
+
+      });\r
+
+      */\r
+
+      //or\r
+
+      \r\n"
+    language: text/javascript
+order: 3000

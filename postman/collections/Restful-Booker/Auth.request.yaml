@@ -1,0 +1,108 @@
+$kind: http-request
+url: https://restful-booker.herokuapp.com/auth
+method: POST
+body:
+  type: json
+  content: "\r
+
+    {\r
+
+    \    \"username\" : \"admin\",\r
+
+    \    \"password\" : \"password123\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "// the variables that are present in the body are created from the titles
+      found ins the csv type or the JSON file and the must match exactly to make
+      collection runner where i can test multiple keys and values in one run.\r
+
+      /**pm.test(\"Status code is 200\" + \" \" +
+      pm.iterationData.get(\"username\") + \" \" +
+      pm.iterationData.get(\"password\"), function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      pm.test(\"Check if the status code is 200\", function () {\r
+
+      \    pm.expect(pm.response.code).to.eql(200)\r
+
+      })\r
+
+      pm.test(\"validating token \" + \" \" + pm.iterationData.get(\"username\")
+      + \" \" + pm.iterationData.get(\"password\"), function () {\r
+
+      \    pm.expect(pm.response.json().token).to.not.be.null;\r
+
+      });\r
+
+      pm.test(\"Check if the status value is OK\", function () {\r
+
+      \    pm.expect(pm.response.status).to.be.equal(\"OK\")\r
+
+      })\r
+
+      pm.test(\"Check if the response time is less than 30s\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(30000)\r
+
+      })\r
+
+      pm.test(\"Check if the response size is less than 5000B\", function () {\r
+
+      \    pm.expect(pm.response.responseSize).to.be.below(5000)\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of serve is Heroku\", function ()
+      {\r
+
+      \    pm.expect(pm.response.headers.get(\"Server\")).to.be.contain(\"Heroku\
+      \")\r
+
+      })\r
+
+      console.log(\"CSV username:\", pm.iterationData.get(\"username\"));\r
+
+      console.log(\"CSV password:\", pm.iterationData.get(\"password\"));\r
+
+      **/"
+    language: text/javascript
+  - type: beforeRequest
+    code: "// here we make tests on the body we send not the response body.\r
+
+      var ResponseBody = JSON.parse(pm.request.body.raw);\r
+
+      \r
+
+      pm.test(\"test body containt 2 attributes name and
+      password\",function(){\r
+
+      \    pm.expect(ResponseBody).to.have.property(\"username\");\r
+
+      \    pm.expect(ResponseBody).to.have.property(\"password\");\r
+
+      })\r
+
+      pm.test(\"test to validate data types\",function(){\r
+
+      \    pm.expect(ResponseBody.username).to.be.a(\"string\");\r
+
+      \    pm.expect(ResponseBody.password).to.be.a(\"string\");\r
+
+      })\r
+
+      \r
+
+      pm.test(\"validate that password field is not empty\", function(){\r
+
+      \    pm.expect(ResponseBody.password).to.not.be.empty;\r
+
+      })\r
+
+      \r\n"
+    language: text/javascript
+order: 1000

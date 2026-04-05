@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{BaseUrl}}/api/v1/cart/6408e5fd6406cd15828e8f28"
+method: DELETE
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MjhhYTQ1NDIxZGM1NTM5ZTk4NzNjYSIsIm5hbWUiOiJBaG1lZCBBYmQgQWwtTXV0aSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjgwMzg2NjQ5LCJleHAiOjE2ODgxNjI2NDl9.Lf8hwcr1cd-EDZKRhitaV_6z15xT_8ImEH-phhXKt4I
+body:
+  type: json
+  content: ""
+auth:
+  type: noauth
+order: 4000

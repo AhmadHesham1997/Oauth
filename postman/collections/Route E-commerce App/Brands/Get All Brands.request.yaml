@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{BaseUrl}}/api/v1/brands"
+method: GET
+queryParams:
+  - key: limit
+    value: "10"
+    disabled: true
+  - key: keyword
+    value: ""
+    disabled: true
+body:
+  type: formdata
+  content: []
+order: 1000

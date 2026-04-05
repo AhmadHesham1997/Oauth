@@ -1,0 +1,46 @@
+$kind: http-request
+url: https://api.spotify.com/v1/browse/new-releases
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+scripts:
+  - type: afterResponse
+    code: "//Status code = 200 OK \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      //Response includes: albums.items,name, release_date, total_tracks\r
+
+      pm.test(\"Response includes albums.items, name, release_date,
+      total_tracks\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    var album = jsonData.albums.items[0];\r
+
+      \    pm.expect(album).to.have.property('name');\r
+
+      \    pm.expect(album).to.have.property('release_date');\r
+
+      \    pm.expect(album).to.have.property('total_tracks');\r
+
+      });\r
+
+      \r
+
+      //Ensure each release has a release_date in valid format (YYYY-MM-DD)\r
+
+      pm.test(\"Release date is in valid format\", function () {\r
+
+      \    pm.expect(jsonData.albums.items[0].release_date).to.match(/^\\d{4}-\
+      \\d{2}-\\d{2}$/);\r
+
+      });"
+    language: text/javascript
+order: 11000

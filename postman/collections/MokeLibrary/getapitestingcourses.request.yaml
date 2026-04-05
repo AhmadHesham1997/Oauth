@@ -1,0 +1,8 @@
+$kind: http-request
+url: "{{url}}/getapitestingcourses"
+method: GET
+body:
+  type: text
+  content: ""
+examples: ./.resources/getapitestingcourses.resources/examples
+order: 1000

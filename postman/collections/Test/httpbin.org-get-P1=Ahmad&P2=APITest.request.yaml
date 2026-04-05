@@ -1,0 +1,40 @@
+$kind: http-request
+name: httpbin.org/get?P1=Ahmad&P2=APITest
+url: httpbin.org/get?P1=Ahmad&P2=APITest
+method: GET
+queryParams:
+  P1: Ahmad
+  P2: APITest
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Your test name\", function () {\r
+
+      pm.test(\"Response time is less than 200ms\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(1000);\r
+
+      });\r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      pm.test(\"Check\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.args.P1).to.eql(\"Ahmad\");\r
+
+      });\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.args.P2).to.eql(\"APITest\");\r
+
+      });"
+    language: text/javascript
+order: 3000

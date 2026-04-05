@@ -1,0 +1,22 @@
+$kind: http-request
+url: https://accounts.spotify.com/api/token
+method: POST
+headers:
+  Authorization: Bearer {{access_token}}
+body:
+  type: urlencoded
+  content:
+    grant_type: client_credentials
+auth:
+  type: basic
+  credentials:
+    password: e697307567a14fcfa34de9417e0b7a49
+    username: ad0f06f29ee542dfb4c5720718942574
+scripts:
+  - type: afterResponse
+    code: "let responseBody = pm.response.json(); // Parse the response body as
+      JSON\r
+
+      pm.environment.set(\"access_token\", responseBody.access_token);\r\n"
+    language: text/javascript
+order: 1000

@@ -1,0 +1,36 @@
+$kind: http-request
+url: https://api.spotify.com/v1/tracks/11dFghVXANMlKmJXsNCbNl
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+scripts:
+  - type: afterResponse
+    code: "//Status code = 200 OK \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      //Ensure duration_ms > 0\r
+
+      pm.test(\"Duration of track is greater than 0\", function () {\r
+
+      \    pm.expect(pm.response.json().duration_ms).to.be.greaterThan(0);\r
+
+      });\r
+
+      \r
+
+      //Validate that popularity is between 0 and 100\r
+
+      pm.test(\"Popularity is between 0 and 100\", function () {\r
+
+      \    pm.expect(pm.response.json().popularity).to.be.within(0, 100);\r
+
+      });"
+    language: text/javascript
+order: 5000

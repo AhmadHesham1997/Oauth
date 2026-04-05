@@ -1,0 +1,51 @@
+$kind: http-request
+url: "{{baseUrl}}/maps/api/place/add/json?key={{apiKey}}"
+method: POST
+queryParams:
+  key: "{{apiKey}}"
+body:
+  type: json
+  content: "{\r
+
+    \  \"location\": {\r
+
+    \    \"lat\": -38.383494,\r
+
+    \    \"lng\": 33.427362\r
+
+    \  },\r
+
+    \  \"accuracy\": 50,\r
+
+    \  \"name\": \"Frontline house\",\r
+
+    \  \"phone_number\": \"(+91) 983 893 3937\",\r
+
+    \  \"address\": \"29, side layout, cohen 09\",\r
+
+    \  \"types\": [\"shoe park\", \"shop\"],\r
+
+    \  \"website\": \"http://google.com\",\r
+
+    \  \"language\": \"French-IN\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      let jsonData = pm.response.json();\r
+
+      \r
+
+      // Save place_id for next requests\r
+
+      pm.collectionVariables.set(\"placeId\", jsonData.place_id);"
+    language: text/javascript
+order: 1000

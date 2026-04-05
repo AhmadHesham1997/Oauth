@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{BaseUrl}}/api/v1/cart"
+method: DELETE
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDdjZjZmNTE1YmRjZjM0N2MwOWYxNyIsImlhdCI6MTY3OTgwMTk0NCwiZXhwIjoxNjg3NTc3OTQ0fQ.h-1qeIQB1GqA4OheJ1cM4sT09MqeDphivHQTyAaurbM
+body:
+  type: json
+  content: ""
+auth:
+  type: noauth
+order: 5000

@@ -1,0 +1,8 @@
+$kind: collection
+variables:
+  ID: ""
+  BookID: ""
+  AisleCode: ""
+  BaseURL: ""
+  BookName: ""
+  Author: ""

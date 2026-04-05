@@ -1,0 +1,14 @@
+$kind: http-request
+url: "{{BaseUrl}}/api/v1/cart/6408e98e6406cd15828e8f30"
+method: PUT
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDdjZjZmNTE1YmRjZjM0N2MwOWYxNyIsImlhdCI6MTY3OTgwMTk0NCwiZXhwIjoxNjg3NTc3OTQ0fQ.h-1qeIQB1GqA4OheJ1cM4sT09MqeDphivHQTyAaurbM
+body:
+  type: json
+  content: |-
+    {
+        "count": "3"
+    }
+auth:
+  type: noauth
+order: 2000

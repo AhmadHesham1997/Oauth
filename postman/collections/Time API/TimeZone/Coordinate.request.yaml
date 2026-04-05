@@ -1,0 +1,385 @@
+$kind: http-request
+url: https://timeapi.io/api/timezone/coordinate?latitude=38.9&longitude=-77.03
+method: GET
+queryParams:
+  latitude: "38.9"
+  longitude: "-77.03"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Check if the status code is 20\", function () {\r
+
+      \    pm.expect(pm.response.code).to.eql(200)\r
+
+      })\r
+
+      pm.test(\"Check if the status value is OK\", function () {\r
+
+      \    pm.expect(pm.response.status).to.be.equal(\"OK\")\r
+
+      })\r
+
+      pm.test(\"Check if the response time is less than 30s\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(30000)\r
+
+      })\r
+
+      pm.test(\"Check if the response size is less than 15000B\", function ()
+      {\r
+
+      \    pm.expect(pm.response.responseSize).to.be.below(15000)\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of serve is nginx/1.27.0\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Server\")).to.be.contain(\"nginx\
+      /1.27.0\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Date is Mon, 10 Nov 2025
+      20:08:20 GMT\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Date\")).to.be.contain(\"Mon, 10
+      Nov 2025\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Content-Type is
+      application/json; charset=utf-8\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.contain(\
+      \"application/json; charset=utf-8\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Transfer-Encoding is
+      chunked\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Transfer-Encoding\")).to.be.cont\
+      ain(\"chunked\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Connection is keep-alive\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Connection\")).to.be.contain(\"k\
+      eep-alive\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Vary is Accept-Encoding\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Vary\")).to.be.contain(\"Accept-\
+      Encoding\")\r
+
+      })\r
+
+      pm.test(\"Validate that the timeZone is America/New_York\", function ()
+      {\r
+
+      \    pm.expect(pm.response.json().timeZone).to.be.contain(\"America/New_Y\
+      ork\")\r
+
+      })\r
+
+      pm.test(\"Validate that the currentLocalTime is
+      2025-11-10T16:04:57.8316398\", function () {\r
+
+      \    pm.expect(pm.response.json().currentLocalTime).to.be.contain(\"2025-\
+      11-10T16:04:57.8316398\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  currentUtcOffset of seconds is
+      -18000\", function () {\r
+
+      \    pm.expect(pm.response.json().currentUtcOffset.seconds).to.be.equal(-\
+      18000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  currentUtcOffset of milliseconds is
+      -18000000\", function () {\r
+
+      \    pm.expect(pm.response.json().currentUtcOffset.milliseconds).to.be.eq\
+      ual(-18000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  currentUtcOffset of ticks is
+      3-180000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().currentUtcOffset.ticks).to.be.equal(-18\
+      0000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  currentUtcOffset of nanoseconds is
+      -18000000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().currentUtcOffset.nanoseconds).to.be.equ\
+      al(-18000000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  standardUtcOffset of seconds is
+      -18000\", function () {\r
+
+      \    pm.expect(pm.response.json().standardUtcOffset.seconds).to.be.equal(\
+      -18000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  standardUtcOffset of milliseconds
+      is  -18000000\", function () {\r
+
+      \    pm.expect(pm.response.json().standardUtcOffset.milliseconds).to.be.e\
+      qual(-18000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  standardUtcOffset of ticks
+      is  -180000000000 \", function () {\r
+
+      \    pm.expect(pm.response.json().standardUtcOffset.ticks).to.be.equal(-1\
+      80000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  standardUtcOffset of nanoseconds is
+      -18000000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().standardUtcOffset.nanoseconds).to.be.eq\
+      ual(-18000000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of hasDayLightSaving is true\", function
+      () {\r
+
+      \    pm.expect(pm.response.json().hasDayLightSaving).to.be.equal(true)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of isDayLightSavingActive is false\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().isDayLightSavingActive).to.be.equal(fal\
+      se)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstName is EDT\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstName).to.be.contain(\"EDT\
+      \")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstOffsetToUtc of
+      seconds is -14400\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstOffsetToUtc.seconds).to.\
+      be.equal(-14400)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstOffsetToUtc of
+      milliseconds is -14400000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstOffsetToUtc.milliseconds\
+      ).to.be.equal(-14400000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstOffsetToUtc of
+      ticks is -144000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstOffsetToUtc.ticks).to.be\
+      .equal(-144000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstOffsetToUtc of
+      nanoseconds is -14400000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstOffsetToUtc.nanoseconds)\
+      .to.be.equal(-14400000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of
+      dstOffsetToStandardTime of seconds is 3600\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstOffsetToStandardTime.sec\
+      onds).to.be.equal(3600)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of
+      dstOffsetToStandardTime of milliseconds is 3600000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstOffsetToStandardTime.mil\
+      liseconds).to.be.equal(3600000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of
+      dstOffsetToStandardTime of ticks is 36000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstOffsetToStandardTime.tic\
+      ks).to.be.equal(36000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of
+      dstOffsetToStandardTime of nanoseconds is 3600000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstOffsetToStandardTime.nan\
+      oseconds).to.be.equal(3600000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstStart is
+      2026-03-08T07:00:00Z\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstStart).to.be.contain(\"2\
+      026-03-08T07:00:00Z\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstEnd is
+      2026-11-01T06:00:00Z\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstStart).to.be.contain(\"2\
+      026-11-01T06:00:00Z\")\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of days
+      is 237\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.days).to.be.equ\
+      al(237)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      nanosecondOfDay is 82800000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.nanosecondOfDay\
+      ).to.be.equal(82800000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of hours
+      is 23 \", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.hours).to.be.eq\
+      ual(23)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      minutes is 0\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.minutes).to.be.\
+      equal(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      seconds is 0\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.seconds).to.be.\
+      equal(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      milliseconds is 0\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.milliseconds).t\
+      o.be.equal(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      subsecondTicks is 0\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.subsecondTicks)\
+      .to.be.equal(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      bclCompatibleTicks is 205596000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.bclCompatibleTi\
+      cks).to.be.equal(205596000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      totalDays is 237.95833333333334\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.totalDays).to.b\
+      e.equal(237.95833333333334)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      totalHours is 5711\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.totalHours).to.\
+      be.equal(5711)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      totalMinutes is 342660\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.totalMinutes).t\
+      o.be.equal(342660)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      totalSeconds is 20559600\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.totalSeconds).t\
+      o.be.equal(20559600)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      totalMilliseconds is 20559600000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.totalMillisecon\
+      ds).to.be.equal(20559600000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      totalTicks is 205596000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.totalTicks).to.\
+      be.equal(205596000000000)\r
+
+      })\r
+
+      pm.test(\"Validate that the vlaue of  dstInterval of dstDuration of
+      totalNanoseconds is 20559600000000000\", function () {\r
+
+      \    pm.expect(pm.response.json().dstInterval.dstDuration.totalNanosecond\
+      s).to.be.equal(20559600000000000)\r
+
+      })"
+    language: text/javascript
+order: 3000

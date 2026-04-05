@@ -1,0 +1,25 @@
+$kind: http-example
+request:
+  url: "{{url}}/getcoursedetails?name=Python"
+  method: GET
+  queryParams:
+    name: Python
+response:
+  statusCode: 201
+  statusText: Created
+  body:
+    type: text
+    content: "{\r
+
+      \    \"name\": \"Python\",\r
+
+      \    \"category\": \"javascript\",\r
+
+      \    \"content\": \"videos\",\r
+
+      \    \"length\": \"15hours\",\r
+
+      \    \"students\": 12342\r
+
+      }"
+order: 2000

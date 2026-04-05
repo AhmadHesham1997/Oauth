@@ -1,0 +1,11 @@
+$kind: http-request
+url: https://ecommerce.routemisr.com/api/v1/cart
+method: GET
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Y2IyY2MwODQ2MmFiMDJjNzFlNjhjYSIsIm5hbWUiOiJtb1NhbGFoIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3MDc4MTQ3NTAsImV4cCI6MTcxNTU5MDc1MH0.1j0t8Jps3TNwqkRxumi-Bi9poBMCRMSt_ruTMFBogFU
+body:
+  type: json
+  content: ""
+auth:
+  type: noauth
+order: 3000

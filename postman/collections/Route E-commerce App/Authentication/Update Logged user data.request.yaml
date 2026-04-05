@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{BaseUrl}}/api/v1/users/updateMe/"
+method: PUT
+headers:
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYmFhNjRiMzk5NDYzMjE3NjEyMWZmZSIsIm5hbWUiOiJBaG1lZCBBYmQgQWwtTXV0aSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjc4MjMyOTMxLCJleHAiOjE2ODYwMDg5MzF9.xn9aRihrI7eJQYgJSHgQMKDK2pcu8Ii_0_8xMV6K7hk
+body:
+  type: json
+  content: |-
+    {
+        "name": "Ahmed Abd Al-Muti",
+        "email": "ahmedmutt2i2@gmail.com",
+        "phone": "01010700700"
+    }
+auth:
+  type: noauth
+order: 7000

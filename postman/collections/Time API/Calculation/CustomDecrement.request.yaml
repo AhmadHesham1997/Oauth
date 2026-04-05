@@ -1,0 +1,201 @@
+$kind: http-request
+url: https://timeapi.io/api/calculation/custom/decrement
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"timeZone\": \"Europe/Amsterdam\",\r
+
+    \  \"dateTime\": \"2021-11-27 05:45:00\",\r
+
+    \  \"timeSpan\": \"16:03:45:17\",\r
+
+    \  \"dstAmbiguity\": \"\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Check if the status code is 20\", function () {\r
+
+      \    pm.expect(pm.response.code).to.eql(200)\r
+
+      })\r
+
+      pm.test(\"Check if the status value is OK\", function () {\r
+
+      \    pm.expect(pm.response.status).to.be.equal(\"OK\")\r
+
+      })\r
+
+      pm.test(\"Check if the response time is less than 30s\", function () {\r
+
+      \    pm.expect(pm.response.responseTime).to.be.below(30000)\r
+
+      })\r
+
+      pm.test(\"Check if the response size is less than 15000B\", function ()
+      {\r
+
+      \    pm.expect(pm.response.responseSize).to.be.below(15000)\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of serve is nginx/1.27.0\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Server\")).to.be.contain(\"nginx\
+      /1.27.0\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Date is Mon, 10 Nov 2025
+      20:08:20 GMT\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Date\")).to.be.contain(\"Mon, 10
+      Nov 2025\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Content-Type is
+      application/json; charset=utf-8\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Content-Type\")).to.be.contain(\
+      \"application/json; charset=utf-8\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Transfer-Encoding is
+      chunked\", function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Transfer-Encoding\")).to.be.cont\
+      ain(\"chunked\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Connection is keep-alive\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Connection\")).to.be.contain(\"k\
+      eep-alive\")\r
+
+      })\r
+
+      pm.test(\"Validate that the header value of Vary is Accept-Encoding\",
+      function () {\r
+
+      \    pm.expect(pm.response.headers.get(\"Vary\")).to.be.contain(\"Accept-\
+      Encoding\")\r
+
+      })\r
+
+      pm.test(\"Validate that the timeZone is Europe/Amsterdam\", function ()
+      {\r
+
+      \    pm.expect(pm.response.json().timeZone).to.be.contain(\"Europe/Amster\
+      dam\")\r
+
+      })\r
+
+      pm.test(\"Validate that the originalDateTime is 2021-11-27T05:45:00\",
+      function () {\r
+
+      \    pm.expect(pm.response.json().originalDateTime).to.be.contain(\"2021-\
+      11-27T05:45:00\")\r
+
+      })\r
+
+      pm.test(\"Validate that the usedTimeSpan is 16:03:45:17\", function () {\r
+
+      \    pm.expect(pm.response.json().usedTimeSpan).to.be.contain(\"16:03:45:\
+      17\")\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of year is 2021 \", function
+      () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.year).to.be.equal(202\
+      1)\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of month is 11 \", function
+      () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.month).to.be.equal(11)\
+      \r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of day is 11 \", function ()
+      {\r
+
+      \    pm.expect(pm.response.json().calculationResult.day).to.be.equal(11)\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of hour is 1 \", function ()
+      {\r
+
+      \    pm.expect(pm.response.json().calculationResult.hour).to.be.equal(1)\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of minute is 59  \",
+      function () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.minute).to.be.equal(59
+      )\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of seconds is 43  \",
+      function () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.seconds).to.be.equal(\
+      43)\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of milliSeconds is 0 \",
+      function () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.milliSeconds).to.be.e\
+      qual(0)\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of dateTime is
+      2021-11-11T01:59:43 \", function () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.dateTime).to.be.conta\
+      in(\"2021-11-11T01:59:43\")\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of date is 11/11/2021 \",
+      function () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.date).to.be.contain(\
+      \"11/11/2021\")\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of time is 01:59 \",
+      function () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.time).to.be.contain(\
+      \"01:59\")\r
+
+      })\r
+
+      pm.test(\"Validate that the calculationResult of dstActive is false \",
+      function () {\r
+
+      \    pm.expect(pm.response.json().calculationResult.dstActive).to.be.equa\
+      l(false)\r
+
+      })"
+    language: text/javascript
+order: 4000

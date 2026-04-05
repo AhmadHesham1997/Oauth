@@ -1,0 +1,223 @@
+$kind: http-request
+url: https://api.spotify.com/v1/audio-analysis/11dFghVXANMlKmJXsNCbNl
+method: GET
+headers:
+  Authorization: Bearer {{access_token}}
+scripts:
+  - type: afterResponse
+    code: "//Status code = 200 OK \r
+
+      pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      //Validate each element() contains start and duration > 0\r
+
+      \r
+
+      \r
+
+      // we can validate by access the element directly using dot notation\r
+
+      const jsonData = pm.response.json();\r
+
+      \r
+
+      /* ---------- BARS ---------- */\r
+
+      pm.test(\"Bars first element has valid values\", () => {\r
+
+      \    pm.expect(jsonData.bars[0].start).to.be.above(0);\r
+
+      \    pm.expect(jsonData.bars[0].duration).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      /* ---------- BEATS ---------- */\r
+
+      pm.test(\"Beats first element has valid values\", () => {\r
+
+      \    pm.expect(jsonData.beats[0].start).to.be.above(0);\r
+
+      \    pm.expect(jsonData.beats[0].duration).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      /* ---------- SECTIONS ---------- */\r
+
+      pm.test(\"Sections first element has valid values\", () => {\r
+
+      \    pm.expect(jsonData.sections[0].start).to.be.above(0);\r
+
+      \    pm.expect(jsonData.sections[0].duration).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      /* ---------- SEGMENTS ---------- */\r
+
+      pm.test(\"Segments first element has valid values\", () => {\r
+
+      \    pm.expect(jsonData.segments[0].start).to.be.above(0);\r
+
+      \    pm.expect(jsonData.segments[0].duration).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      /* ---------- TATUMS ---------- */\r
+
+      pm.test(\"Tatums first element has valid values\", () => {\r
+
+      \    pm.expect(jsonData.tatums[0].start).to.be.above(0);\r
+
+      \    pm.expect(jsonData.tatums[0].duration).to.be.above(0);\r
+
+      });\r
+
+      \r
+
+      //OR we can validate by looping each element in the array\r
+
+      // pm.test(\"Bars should have start and duration > 0\", function () {\r
+
+      //     var jsonData = pm.response.json();\r
+
+      //     pm.expect(jsonData.bars).to.have.lengthOf.above(0);\r
+
+      //     jsonData.bars.forEach(function (bar) {\r
+
+      //         pm.expect(bar.start).to.be.above(0);\r
+
+      //         pm.expect(bar.duration).to.be.above(0);\r
+
+      //     });\r
+
+      \r
+
+      //     pm.expect(jsonData.beats).to.have.lengthOf.above(0);\r
+
+      //     jsonData.beats.forEach(function (beats) {\r
+
+      //         pm.expect(beats.start).to.be.above(0);\r
+
+      //         pm.expect(beats.duration).to.be.above(0);\r
+
+      //     });\r
+
+      //     pm.expect(jsonData.sections).to.have.lengthOf.above(0);\r
+
+      //     jsonData.sections.forEach(function (sections) {\r
+
+      //         pm.expect(sections.start).to.be.above(0);\r
+
+      //         pm.expect(sections.duration).to.be.above(0);\r
+
+      //     });\r
+
+      \r
+
+      //     pm.expect(jsonData.segments).to.have.lengthOf.above(0);\r
+
+      //     jsonData.segments.forEach(function (segments) {\r
+
+      //         pm.expect(segments.start).to.be.above(0);\r
+
+      //         pm.expect(segments.duration).to.be.above(0);\r
+
+      //     });\r
+
+      \r
+
+      //     pm.expect(jsonData.tatums).to.have.lengthOf.above(0);\r
+
+      //     jsonData.tatums.forEach(function (tatums) {\r
+
+      //         pm.expect(tatums.start).to.be.above(0);\r
+
+      //         pm.expect(tatums.duration).to.be.above(0);\r
+
+      //     });\r
+
+      // });\r
+
+      \r
+
+      //Response should be from Spotify Documentation if the status code is
+      200\r
+
+      /*\r
+
+      \"bars\": [\r
+
+      \    {\r
+
+      \        \"start\": 0.49567,\r
+
+      \        \"duration\": 2.18749,\r
+
+      \    }\r
+
+      ],\r
+
+      \"beats\": [\r
+
+      \    {\r
+
+      \      \"start\": 0.49567,\r
+
+      \      \"duration\": 2.18749,\r
+
+      \    }\r
+
+      ],\r
+
+      \"sections\": [\r
+
+      \    {\r
+
+      \      \"start\": 0,\r
+
+      \      \"duration\": 6.97092,\r
+
+      \    }\r
+
+      ]\r
+
+      \"segments\": [\r
+
+      \    {\r
+
+      \      \"start\": 0.70154,\r
+
+      \      \"duration\": 0.19891,\r
+
+      \    }\r
+
+      ]\r
+
+      \"tatums\": [\r
+
+      \    {\r
+
+      \      \"start\": 0.49567,\r
+
+      \      \"duration\": 2.18749,\r
+
+      \    }\r
+
+      ]\r
+
+      */"
+    language: text/javascript
+order: 7000

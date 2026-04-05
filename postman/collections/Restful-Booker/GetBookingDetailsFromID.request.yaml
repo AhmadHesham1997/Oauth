@@ -1,0 +1,6 @@
+$kind: http-request
+url: https://{{baseURL}}/booking/1909
+method: GET
+settings:
+  protocolVersion: auto
+order: 5000

@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{baseURL}}/booking?firstname=Josh&lastname=Allen"
+method: GET
+queryParams:
+  firstname: Josh
+  lastname: Allen
+order: 3000

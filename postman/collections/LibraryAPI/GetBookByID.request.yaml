@@ -1,0 +1,132 @@
+$kind: http-request
+url: "{{BaseURL}}Library/GetBook.php?ID={{ID}}"
+method: GET
+queryParams:
+  ID: "{{ID}}"
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"isbn of data type string\", function () {\r
+
+      \    pm.expect(pm.response.json()[0].isbn).to.be.a(\"string\")\r
+
+      })\r
+
+      pm.test(\"isbn property exists\", function () {\r
+
+      \    pm.expect(pm.response.json()[0]).to.have.property(\"isbn\")\r
+
+      })\r
+
+      pm.test(\"Response is valid JSON\", function () {\r
+
+      \    pm.response.to.be.json;\r
+
+      });\r
+
+      \r
+
+      let Y = pm.collectionVariables.get(\"BookName\");\r
+
+      let Z = pm.collectionVariables.get(\"BookID\");\r
+
+      let W = pm.collectionVariables.get(\"AisleCode\");\r
+
+      let X = pm.collectionVariables.get(\"Author\");\r
+
+      pm.test(\"Validate whole body data\", function () {\r
+
+      \    pm.expect(pm.response.json()[0].author).be.equal(X)\r
+
+      \    pm.expect(pm.response.json()[0].isbn).be.equal(Z)\r
+
+      \    // parsed to string because the aisle code is a number and the
+      response is a string.\r
+
+      \    pm.expect(pm.response.json()[0].aisle).be.equal(String(W))\r
+
+      \    pm.expect(pm.response.json()[0].book_name).be.equal(Y)\r
+
+      })\r
+
+      //  this helps validate the json schema against requirment document where
+      we take the data from SRS \r
+
+      // Then pase ot to this website :
+      https://www.liquid-technologies.com/online-json-to-schema-converter\r
+
+      // then take this response and test it here in postman \r
+
+      // so in conclusion this command compares the response body to the schemma
+      that i got from SRS to validate it\r
+
+      const Schema = \r
+
+      {\r
+
+      \  \"type\": \"array\",\r
+
+      \  \"items\": [\r
+
+      \    {\r
+
+      \      \"type\": \"object\",\r
+
+      \      \"properties\": {\r
+
+      \        \"book_name\": {\r
+
+      \          \"type\": \"string\"\r
+
+      \        },\r
+
+      \        \"isbn\": {\r
+
+      \          \"type\": \"string\"\r
+
+      \        },\r
+
+      \        \"aisle\": {\r
+
+      \          \"type\": \"string\"\r
+
+      \        },\r
+
+      \        \"author\": {\r
+
+      \          \"type\": \"string\"\r
+
+      \        }\r
+
+      \      },\r
+
+      \      \"required\": [\r
+
+      \        \"book_name\",\r
+
+      \        \"isbn\",\r
+
+      \        \"aisle\",\r
+
+      \        \"author\"\r
+
+      \      ]\r
+
+      \    }\r
+
+      \  ]\r
+
+      }\r
+
+      pm.test(\"Validating JSON Schema\", function () {\r
+
+      \    pm.response.to.have.jsonSchema(Schema);\r
+
+      });\r
+
+      \r
+
+      \r\n"
+    language: text/javascript
+order: 3000

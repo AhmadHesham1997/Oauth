@@ -1,0 +1,27 @@
+$kind: collection
+scripts:
+  - type: http:afterResponse
+    code: "// newman run thru CMD\r
+
+      // newman run collection.json –d data.csv – e environmentVariables.json –g
+      globalVariables.json -n \r
+
+      // collection.json or data.csv is the name of the file where i will run we
+      should run from the folder where the file exist\r
+
+      //by typing cmd in the search bar then run the command\r
+
+      // – e environmentVariables.json –g globalVariables.json these commands is
+      to add variables with the main file that \r
+
+      // i already exported\r
+
+      // -n means number of iterations if i want to repeat the test multiple
+      times\r
+
+      //newman run Time_API.postman_collection.json -r htmlextra this code
+      exports my result into an html file with \r
+
+      //good UI to better understand the report"
+    language: text/javascript
+order: 1000
