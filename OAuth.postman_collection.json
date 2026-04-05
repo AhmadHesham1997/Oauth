@@ -1,0 +1,95 @@
+{
+  "info": {
+    "_postman_id": "64f7eb1f-27f7-4138-a948-5846c447c13b",
+    "name": "OAuth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33853759"
+  },
+  "item": [
+    {
+      "name": "Token",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "client_id",
+              "value": "test_client_id",
+              "type": "text",
+              "uuid": "45061bc3-22ae-4872-b807-88cc2455fa5a"
+            },
+            {
+              "key": "client_secret",
+              "value": "test_client_secret",
+              "type": "text",
+              "uuid": "5c0d56e0-1013-4e4c-8814-e5236950ed93"
+            },
+            {
+              "key": "grant_type",
+              "value": "client_credentials",
+              "type": "text",
+              "uuid": "87f51a5b-63dc-4a78-a64d-1740dc32168e"
+            },
+            {
+              "key": "scope",
+              "value": "read",
+              "type": "text",
+              "uuid": "bc3ca091-4e07-4053-b72b-a3830fb4e57d"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:3000/oauth/token",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "oauth",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GetcourseDetails",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "mock_access_token_12345",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/data",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "data"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseURL",
+      "value": ""
+    }
+  ]
+}
